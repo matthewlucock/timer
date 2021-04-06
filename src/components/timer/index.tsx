@@ -60,14 +60,10 @@ export const Timer: preact.FunctionComponent = () => {
 
   useEffect(() => {
     logic.current = new TimerLogic()
-    logic.current.emitter.on('elapsed', (elapsedPercentage?: number): void => {
-      if (elapsedPercentage === undefined) throw new Error('Missing elapsed percentage')
+    logic.current.onElapsed = (elapsedPercentage: number): void => {
       elapsedIndicator.current.update(elapsedPercentage)
-    })
-    logic.current.emitter.on('tick', (time?: number): void => {
-      if (time === undefined) throw new Error('Missing time')
-      setTime(time)
-    })
+    }
+    logic.current.onTick = setTime
   }, [])
 
   const start = (): void => {

@@ -1,18 +1,16 @@
-import mitt from 'mitt'
-
 class Clock {
   private running: boolean = false
   private lastFrameTime: number = 0
-  public update?: (timeDifference: number) => void
+  public onFrame?: (timeDifference: number) => void
 
   private readonly frame = (time: number): void => {
     if (!this.running) return
-    if (this.update === undefined) throw new Error('Missing clock update function')
+    if (this.onFrame === undefined) throw new Error('Missing clock update function')
 
     const timeDifference = time - this.lastFrameTime
     this.lastFrameTime = time
 
-    this.update(timeDifference)
+    this.onFrame(timeDifference)
     requestAnimationFrame(this.frame)
   }
 
@@ -32,21 +30,26 @@ export class TimerLogic {
   private duration: number = 0
   private remainingTime: number = 0
   private lastTickTime: number = 0
-  public readonly emitter = mitt()
+
+  public onElapsed?: (elapsedPercentage: number) => void
+  public onTick?: (time: number) => void
 
   public constructor () {
-    this.clock.update = this.body
+    this.clock.onFrame = this.body
   }
 
   private readonly body = (timeDifference: number): void => {
+    if (this.onElapsed === undefined) throw new Error('Missing onElapsed function')
+    if (this.onTick === undefined) throw new Error('Missing onTick function')
+
     this.remainingTime = Math.max(this.remainingTime - timeDifference, 0)
 
     const elapsedPercentage = 1 - (this.remainingTime / this.duration)
-    this.emitter.emit('elapsed', elapsedPercentage)
+    this.onElapsed(elapsedPercentage)
 
     if (this.remainingTime === 0) {
       this.clock.stop()
-      this.emitter.emit('tick', 0)
+      this.onTick(0)
       return
     }
 
@@ -54,7 +57,7 @@ export class TimerLogic {
       this.lastTickTime = this.remainingTime
 
       const wholeTime = Math.ceil(this.remainingTime / 1000)
-      this.emitter.emit('tick', wholeTime)
+      this.onTick(wholeTime)
     }
   }
 
