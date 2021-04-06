@@ -56,7 +56,7 @@ const config: webpack.Configuration = {
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
-      template: path.resolve(SRC, 'index.html'),
+      template: path.resolve(SRC, 'static/index.html'),
       inject: 'head',
       scriptLoading: 'defer'
     })
