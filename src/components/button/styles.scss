@@ -1,0 +1,17 @@
+.button {
+  padding: 0.2em 0.5em;
+  text-transform: capitalize;
+  cursor: pointer;
+  background-color: var(--first-color);
+  border-radius: 1em;
+  opacity: 1;
+  transition-property: opacity, background-color;
+
+  &:not(:disabled):hover {
+    background-color: var(--second-color);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+  }
+}

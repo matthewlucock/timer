@@ -1,0 +1,12 @@
+{
+  "extends": ["standard-with-typescript", "standard-jsx"],
+  "parserOptions": { "project": "./tsconfig.json" },
+  "ignorePatterns": ["dist"],
+
+  "rules": {
+    "max-len": ["error", { "code": 100, "ignoreStrings": true }],
+    "no-console": "error",
+    "@typescript-eslint/consistent-type-definitions": ["error", "type"],
+    "react/jsx-handler-names": "off"
+  }
+}

@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: hsl(0, 0%, 100%);
+  cursor: default;
+  background-color: hsl(200, 100%, 30%);
+}
+
+.time {
+  margin: 0.15em 0;
+  font-size: 5em;
+}
+
+.elapsed-indicator-container {
+  display: flex;
+}
+
+.buttons {
+  display: flex;
+  margin-top: 1.25em;
+
+  > :not(:last-child) {
+    margin-right: 1em;
+  }
+}

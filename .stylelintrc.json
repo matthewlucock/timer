@@ -1,0 +1,8 @@
+{
+  "extends": ["stylelint-config-sass-guidelines", "stylelint-config-recess-order"],
+  "ignoreFiles": ["dist"],
+
+  "rules": {
+    "order/properties-alphabetical-order": null
+  }
+}

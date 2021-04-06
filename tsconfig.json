@@ -1,0 +1,26 @@
+{
+  "include": ["**/*", "src/.d.ts"],
+
+  "compilerOptions": {
+    "alwaysStrict": true,
+    "baseUrl": ".",
+    "esModuleInterop": true,
+    "jsx": "react",
+    "jsxFactory": "preact.h",
+    "jsxFragmentFactory": "preact.Fragment",
+    "moduleResolution": "node",
+    "paths": { "timer/*": ["src/*"] },
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules",
+        "options": {
+          "customMatcher": "\\.scss$",
+          "classnameTransform": "camelCaseOnly",
+          "rendererOptions": { "sass": { "includePaths": ["src"] } }
+        }
+      }
+    ],
+    "strict": true,
+    "target": "es2019",
+  }
+}

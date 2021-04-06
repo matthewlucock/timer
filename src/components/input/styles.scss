@@ -1,0 +1,20 @@
+.input {
+  box-sizing: content-box;
+  text-align: center;
+  transition-property: background-color;
+
+  &:not(:disabled):hover,
+  &:focus {
+    background-color: var(--first-color);
+  }
+
+  &:disabled {
+    user-select: inherit;
+  }
+}
+
+.width-calculator {
+  position: absolute;
+  height: 0;
+  overflow: hidden;
+}
