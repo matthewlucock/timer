@@ -24,5 +24,8 @@ jobs:
       - name: 'Lint styles'
         run: 'npm run lint:styles'
 
+      - name: 'Lint HTML'
+        run: 'npm run lint:html'
+
       - name: 'Build'
         run: 'npm run build'
