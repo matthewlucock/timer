@@ -31,10 +31,11 @@ export const Input: preact.FunctionComponent<Props> = props => {
   }
 
   const onContainerMouseDown = (event: MouseEvent): void => {
-    input.current.focus()
-
-    // Prevent the mousedown event itself from blurring the just-focused input
-    event.preventDefault()
+    if (!focused) {
+      input.current.focus()
+      // Prevent the mousedown event itself from blurring the just-focused input
+      event.preventDefault()
+    }
   }
   const containerClassName = clsx(
     styles.container,
