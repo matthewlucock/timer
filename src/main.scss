@@ -12,6 +12,15 @@ body {
   font-size: 30px;
   font-weight: lighter;
   user-select: none;
+
+  // Try and prevent transitons firing on page load.
+  // Transitions have to be disabled when not loaded, instead of enabled when loaded, to ensure
+  // the transition duration is not overridden due to selector specificity.
+  &:not(.loaded) {
+    &, * {
+      transition-duration: initial;
+    }
+  }
 }
 
 input {
