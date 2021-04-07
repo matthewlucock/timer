@@ -24,12 +24,17 @@ export const Input: preact.FunctionComponent<Props> = props => {
   }
 
   useLayoutEffect(() => {
+    // The width calculator must always have the same font size as the input for the width to be
+    // accurate.
+    const { fontSize } = getComputedStyle(input.current)
+    widthCalculator.current.style.fontSize = fontSize
+
     widthCalculator.current.textContent = props.value
     input.current.style.width = `${widthCalculator.current.offsetWidth}px`
   }, [props.value])
 
   return (
-    <>
+    <div>
       <input
         ref={input}
         className={clsx(styles.input, props.className)}
@@ -42,6 +47,6 @@ export const Input: preact.FunctionComponent<Props> = props => {
       />
 
       <span ref={widthCalculator} className={styles.widthCalculator} aria-hidden />
-    </>
+    </div>
   )
 }

@@ -15,6 +15,9 @@
 
 .width-calculator {
   position: absolute;
-  height: 0;
-  overflow: hidden;
+
+  // Ensure that trailing or leading whitespace is included in the size of the element
+  white-space: pre;
+
+  visibility: hidden;
 }
