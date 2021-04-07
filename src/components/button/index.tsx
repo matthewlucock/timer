@@ -1,14 +1,10 @@
 import * as preact from 'preact'
+import clsx from 'clsx'
 
 import styles from './styles.scss'
 
-type Props = Readonly<{
-  onClick: () => void
-  disabled?: boolean
-}>
+type Props = preact.JSX.HTMLAttributes<HTMLButtonElement>
 
-export const Button: preact.FunctionComponent<Props> = props => (
-  <button className={styles.button} onClick={props.onClick} disabled={props.disabled}>
-    {props.children}
-  </button>
+export const Button: preact.FunctionComponent<Props> = ({ className, ...rest }) => (
+  <button className={clsx(styles.button, className)} {...rest} />
 )

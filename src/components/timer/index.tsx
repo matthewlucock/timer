@@ -31,6 +31,7 @@ export const Timer: preact.FunctionComponent = () => {
 
   const [running, setRunning] = useState<boolean>(false)
   const [paused, setPaused] = useState<boolean>(false)
+  const starting = useRef<boolean>(false)
 
   const inProgress = running || paused
   const showHours = !inProgress || time >= HOUR
@@ -89,6 +90,7 @@ export const Timer: preact.FunctionComponent = () => {
   const start = (): void => {
     logic.current.start(time)
     setRunning(true)
+    starting.current = false
   }
   const pause = (): void => {
     logic.current.pause()
@@ -101,11 +103,18 @@ export const Timer: preact.FunctionComponent = () => {
   }
 
   const onBlur = (): void => {
+    if (starting.current) return
     updateTimeParts(time)
+  }
+  const onMouseUp = (): void => {
+    if (starting.current) {
+      updateTimeParts(time)
+      starting.current = false
+    }
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onMouseUp={onMouseUp}>
       <TimerName />
 
       <div className={styles.time}>
@@ -156,7 +165,17 @@ export const Timer: preact.FunctionComponent = () => {
             )
           }
 
-          return <Button onClick={start} disabled={time === 0}>start</Button>
+          return (
+            <Button
+              disabled={time === 0}
+              onClick={start}
+              onMouseDown={(): void => {
+                starting.current = true
+              }}
+            >
+              start
+            </Button>
+          )
         })()}
       </div>
     </div>
