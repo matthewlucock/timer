@@ -23,6 +23,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.3.1",
     "eslint-plugin-react": "^7.23.1",
+    "file-loader": "^6.2.0",
     "html-validate": "^4.9.0",
     "html-webpack-plugin": "^5.3.1",
     "mini-css-extract-plugin": "^1.4.0",
@@ -42,6 +43,7 @@
     "webpack-dev-server": "^4.0.0-beta.1"
   },
   "dependencies": {
+    "@fontsource/source-sans-pro": "^4.2.2",
     "clsx": "^1.1.1",
     "preact": "^10.5.13",
     "ress": "^3.0.0"

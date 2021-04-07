@@ -21,6 +21,7 @@ const config: webpack.Configuration = {
   module: {
     rules: [
       { test: /\.tsx?$/, use: 'ts-loader' },
+
       {
         test: /\.scss$/,
         use: [
@@ -48,7 +49,15 @@ const config: webpack.Configuration = {
           }
         ]
       },
-      { test: /\.css$/, use: [MiniCssExtractPlugin.loader, 'css-loader'] }
+      { test: /\.css$/, use: [MiniCssExtractPlugin.loader, 'css-loader'] },
+
+      {
+        test: /\.woff2?$/,
+        use: {
+          loader: 'file-loader',
+          options: { name: '[hash:base64:10].[ext]' }
+        }
+      }
     ]
   },
 
