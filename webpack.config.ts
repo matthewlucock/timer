@@ -67,11 +67,7 @@ const config: webpack.Configuration = {
     new MiniCssExtractPlugin(),
     new CssMinimizerPlugin(),
     new HtmlWebpackPlugin({ template: path.resolve(SRC, 'static/index.html') })
-  ],
-
-  devServer: {
-    historyApiFallback: true
-  }
+  ]
 }
 
 export default config
