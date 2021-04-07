@@ -4,6 +4,7 @@ import webpack from 'webpack'
 import autoprefixer from 'autoprefixer'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 
 const SRC = path.resolve(__dirname, 'src')
@@ -64,6 +65,7 @@ const config: webpack.Configuration = {
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin(),
+    new CssMinimizerPlugin(),
     new HtmlWebpackPlugin({ template: path.resolve(SRC, 'static/index.html') })
   ],
 
