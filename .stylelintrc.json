@@ -7,9 +7,13 @@
   "ignoreFiles": ["dist"],
 
   "rules": {
-    "max-nesting-depth": [1, { "ignore": ["pseudo-classes"] }],
     "selector-list-comma-space-after": "always-single-line",
     "selector-list-comma-newline-after": "always-multi-line",
+    "declaration-empty-line-before": [
+      "always",
+      { "except": ["first-nested"], "ignore": ["after-declaration", "after-comment"] }
+    ],
+    "max-nesting-depth": [1, { "ignore": ["pseudo-classes"] }],
     "order/properties-alphabetical-order": null
   }
 }
