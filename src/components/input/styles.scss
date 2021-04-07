@@ -1,20 +1,30 @@
-.input {
-  box-sizing: content-box;
-  text-align: center;
+.container {
+  cursor: text;
   transition-property: background-color;
 
-  &:disabled {
-    user-select: inherit;
-  }
-
-  &:focus, &:not(:disabled):hover {
+  &.focused, &:not(.disabled):hover {
     background-color: var(--first-color);
   }
 }
 
-.width-calculator {
+.inner-container {
+  position: relative;
+}
+
+.input {
   position: absolute;
+  width: 100%;
+
+  &:disabled {
+    user-select: inherit;
+  }
+}
+
+.sizer {
+  padding: 0 1px;
+
   // Ensure that trailing or leading whitespace is included in the size of the element
   white-space: pre;
+
   visibility: hidden;
 }

@@ -1,5 +1,5 @@
 import * as preact from 'preact'
-import { useRef, useLayoutEffect } from 'preact/hooks'
+import { useRef, useState } from 'preact/hooks'
 import clsx from 'clsx'
 
 import styles from './styles.scss'
@@ -15,38 +15,51 @@ type Props = Readonly<{
 
 export const Input: preact.FunctionComponent<Props> = props => {
   const input = useRef<HTMLInputElement>()
-  const widthCalculator = useRef<HTMLElement>()
+  const [focused, setFocused] = useState<boolean>(false)
 
   const onInput = (): void => {
     const newValue = input.current.value
     const setResult = props.setValue(newValue)
     if (setResult === false) input.current.value = props.value
   }
+  const onFocus = (): void => {
+    setFocused(true)
+  }
+  const onBlur = (): void => {
+    setFocused(false)
+    if (props.onBlur !== undefined) props.onBlur()
+  }
 
-  useLayoutEffect(() => {
-    // The width calculator must always have the same font size as the input for the width to be
-    // accurate.
-    const { fontSize } = getComputedStyle(input.current)
-    widthCalculator.current.style.fontSize = fontSize
+  const onContainerMouseDown = (event: MouseEvent): void => {
+    input.current.focus()
 
-    widthCalculator.current.textContent = props.value
-    input.current.style.width = `${widthCalculator.current.offsetWidth}px`
-  }, [props.value])
+    // Prevent the mousedown event itself from blurring the just-focused input
+    event.preventDefault()
+  }
+  const containerClassName = clsx(
+    styles.container,
+    focused && styles.focused,
+    props.disabled === true && styles.disabled,
+    props.className
+  )
 
   return (
-    <div>
-      <input
-        ref={input}
-        className={clsx(styles.input, props.className)}
-        type='text'
-        value={props.value}
-        disabled={props.disabled}
-        onInput={onInput}
-        onBlur={props.onBlur}
-        spellcheck={false}
-      />
+    <div className={containerClassName} onMouseDown={onContainerMouseDown}>
+      <div className={styles.innerContainer}>
+        <input
+          ref={input}
+          className={styles.input}
+          type='text'
+          value={props.value}
+          disabled={props.disabled}
+          onInput={onInput}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          spellcheck={false}
+        />
 
-      <span ref={widthCalculator} className={styles.widthCalculator} aria-hidden />
+        <span className={styles.sizer} aria-hidden>{props.value}</span>
+      </div>
     </div>
   )
 }
