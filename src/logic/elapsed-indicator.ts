@@ -1,4 +1,4 @@
-const STROKE_WIDTH_TO_SIZE_RATIO = 1 / 12
+const STROKE_WIDTH_TO_SIZE_RATIO = 1 / 10
 
 export class ElapsedIndicator {
   public readonly element: HTMLCanvasElement = document.createElement('canvas')
