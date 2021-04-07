@@ -1,8 +1,15 @@
 {
-  "extends": ["stylelint-config-sass-guidelines", "stylelint-config-recess-order"],
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-sass-guidelines",
+    "stylelint-config-recess-order"
+  ],
   "ignoreFiles": ["dist"],
 
   "rules": {
+    "max-nesting-depth": [1, { "ignore": ["pseudo-classes"] }],
+    "selector-list-comma-space-after": "always-single-line",
+    "selector-list-comma-newline-after": "always-multi-line",
     "order/properties-alphabetical-order": null
   }
 }

@@ -3,21 +3,18 @@
   text-align: center;
   transition-property: background-color;
 
-  &:not(:disabled):hover,
-  &:focus {
-    background-color: var(--first-color);
-  }
-
   &:disabled {
     user-select: inherit;
+  }
+
+  &:focus, &:not(:disabled):hover {
+    background-color: var(--first-color);
   }
 }
 
 .width-calculator {
   position: absolute;
-
   // Ensure that trailing or leading whitespace is included in the size of the element
   white-space: pre;
-
   visibility: hidden;
 }
